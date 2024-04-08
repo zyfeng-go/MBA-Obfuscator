@@ -7,7 +7,7 @@ MBA expression generation including linear, polynomial, non-polynomial.
 import sys
 sys.path.append("../tools")
 import z3
-
+import random as rd
 from lMBA_generate import complex_groundtruth
 from mba_string_operation import verify_mba_unsat
 from pMBA_generate import groundtruth_2_pmba
@@ -64,25 +64,33 @@ def mba_obfuscator(sexpre, flag="p"):
         pass
         #pass verification.
     else:
-        print("sorry, program output a wrong expression!")
+        print("[ERROR]: program output a wrong expression.")
+        sys.exit(1)
 
 
     return cexpre
 
 
-
 def unittest( ):
-    sexpre = "x+y"
+    MBAs = {}
+    constant = rd.randint(5, 100)
+    sexpres = ["x+y", "x-y", "x&y", "x|y", "x^y", "x", f"x+{constant}"]
 
-    print(sexpre, mba_obfuscator(sexpre, "l"))
-    print(sexpre, mba_obfuscator(sexpre, "p"))
-    print(sexpre, mba_obfuscator(sexpre, "np_zero"))
-    print(sexpre, mba_obfuscator(sexpre, "np_recur"))
-    print(sexpre, mba_obfuscator(sexpre, "np_replace"))
+    for sexpre in sexpres:
+        print("Expression:", sexpre)
+        MBAs[sexpre] = [mba_obfuscator(sexpre, "l"),
+                        mba_obfuscator(sexpre, "p"),
+                        mba_obfuscator(sexpre, "np_zero"),
+                        mba_obfuscator(sexpre, "np_recur"),
+                        mba_obfuscator(sexpre, "np_replace")]
+        
+        # print(sexpre, mba_obfuscator(sexpre, "l"))
+        # print(sexpre, mba_obfuscator(sexpre, "p"))
+        # print(sexpre, mba_obfuscator(sexpre, "np_zero"))
+        # print(sexpre, mba_obfuscator(sexpre, "np_recur"))
+        # print(sexpre, mba_obfuscator(sexpre, "np_replace"))
 
-
-
-    return None
+    return MBAs
 
 
 if __name__ == "__main__":

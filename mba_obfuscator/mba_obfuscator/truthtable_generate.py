@@ -119,7 +119,7 @@ def output_truthtable(truthtableList, vnumber):
         truthtableList: the list of truthtable and related bitwise expression.
         vnumver: the number of variables in one bitwise expression.
     """
-    filename = "../dataset/{vnumber}variable_truthtable.txt".format(vnumber=vnumber)
+    filename = "MBA_Obfuscator/mba_obfuscator/dataset/{vnumber}variable_truthtable.txt".format(vnumber=vnumber)
     with open(filename, "wt") as fw:
         truthtable = None
         bitwiseExpre = None

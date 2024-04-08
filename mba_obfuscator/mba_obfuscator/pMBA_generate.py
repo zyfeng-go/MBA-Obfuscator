@@ -42,18 +42,18 @@ class PolyMBAGenerator():
             traceback.print_stack()
             sys.exit(0)
         if not MBAfile1:
-            self.MBAfile1 = "../dataset/lMBA_{vnumber}variable.dataset.sorted.txt".format(vnumber=vnumber1)
+            self.MBAfile1 = "MBA_Obfuscator/mba_obfuscator/dataset/lMBA_{vnumber}variable.dataset.sorted.txt".format(vnumber=vnumber1)
         else:
             self.MBAfile1 = MBAfile1
         self.MBAList1 = self.get_MBA(self.MBAfile1)
         if not MBAfile2:
-            self.MBAfile2 = "../dataset/lMBA_{vnumber}variable.dataset.sorted.txt".format(vnumber=vnumber2)
+            self.MBAfile2 = "MBA_Obfuscator/mba_obfuscator/dataset/lMBA_{vnumber}variable.dataset.sorted.txt".format(vnumber=vnumber2)
             #self.MBAfile2 = r"pMBA_{vnumber}*{vnumber}variable.dataset.sorted.txt".format(vnumber=vnumber2)
         else:
             self.MBAfile2 = MBAfile2
         self.MBAList2 = self.get_MBA(self.MBAfile2)
         if not MBAdesfile:
-            self.MBAdesfile = "../dataset/pMBA_{vnumber1}_{vnumber2}variable.dataset.txt".format(vnumber1=self.vnumber1, vnumber2=self.vnumber2)
+            self.MBAdesfile = "MBA_Obfuscator/mba_obfuscator/dataset/pMBA_{vnumber1}_{vnumber2}variable.dataset.txt".format(vnumber1=self.vnumber1, vnumber2=self.vnumber2)
         else:
             self.MBAdesfile = MBAdesfile
         
@@ -479,18 +479,18 @@ def high_degree_MBA_generation(vnumber1, vnumber2, degree, mbanumber=100):
         However, this function generates multiple middle file.
     """
     #the original two dataset
-    fileread1 = "../dataset/lMBA_{vnumber}variable.dataset.sorted.txt".format(vnumber=vnumber1)
-    fileread2 = "../dataset/lMBA_{vnumber}variable.dataset.sorted.txt".format(vnumber=vnumber2)
+    fileread1 = "MBA_Obfuscator/mba_obfuscator/dataset/lMBA_{vnumber}variable.dataset.sorted.txt".format(vnumber=vnumber1)
+    fileread2 = "MBA_Obfuscator/mba_obfuscator/dataset/lMBA_{vnumber}variable.dataset.sorted.txt".format(vnumber=vnumber2)
 
     for i in range(2, degree+1):
         #generate i-degree mba expression
-        filewrite1 = "../dataset/pMBA_{vnumber1}_{vnumber2}variable.{degree}degree.transformation.dataset.txt".format(vnumber1=vnumber1, vnumber2=vnumber2, degree=i)
+        filewrite1 = "MBA_Obfuscator/mba_obfuscator/dataset/pMBA_{vnumber1}_{vnumber2}variable.{degree}degree.transformation.dataset.txt".format(vnumber1=vnumber1, vnumber2=vnumber2, degree=i)
         pmbaObj = PolyMBAGenerator(vnumber1, vnumber2, fileread1, fileread2, filewrite1)
         pmbaObj.generate_pmba_transformation_dataset(mbanumber)
         #pmbaObj.generate_pmba_transformation_dataset(mbanumber)
         # (fileread1 * fileread2) * fileread2 * fileread2 * ....
         fileread1 = filewrite1
-        filewrite2 = "../dataset/pMBA_{vnumber1}_{vnumber2}variable.{degree}degree.transformation.dataset.sorted.txt".format(vnumber1=vnumber1, vnumber2=vnumber2, degree=i)
+        filewrite2 = "MBA_Obfuscator/mba_obfuscator/dataset/pMBA_{vnumber1}_{vnumber2}variable.{degree}degree.transformation.dataset.sorted.txt".format(vnumber1=vnumber1, vnumber2=vnumber2, degree=i)
         pMBA_sort_by_term(filewrite1, filewrite2)
         
 
@@ -501,8 +501,8 @@ def high_degree_MBA_generation(vnumber1, vnumber2, degree, mbanumber=100):
 def sort_dataset(vnumber1, vnumber2):
     """sort the dataset of poly MBA expression.
     """
-    fileread = "../dataset/pMBA_{vnumber1}_{vnumber2}variable.dataset.txt".format(vnumber1=vnumber1, vnumber2=vnumber2)
-    filewrite = "../dataset/pMBA_{vnumber1}_{vnumber2}variable.dataset.sorted.txt".format(vnumber1=vnumber1, vnumber2=vnumber2)
+    fileread = "MBA_Obfuscator/mba_obfuscator/dataset/pMBA_{vnumber1}_{vnumber2}variable.dataset.txt".format(vnumber1=vnumber1, vnumber2=vnumber2)
+    filewrite = "MBA_Obfuscator/mba_obfuscator/dataset/pMBA_{vnumber1}_{vnumber2}variable.dataset.sorted.txt".format(vnumber1=vnumber1, vnumber2=vnumber2)
     pMBA_sort_by_term(fileread, filewrite)
 
     return None
